@@ -55,7 +55,7 @@ Walls now change colour when they bounce
 ### Change log
 * 2025 - Naman made it harder
 * 2026 - William made it easier again
-* 25/102026 - Added trail affect to ball
+* 2026 - Matthew made the game feel better
 
 ---
 
