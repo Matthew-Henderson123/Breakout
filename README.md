@@ -1,3 +1,6 @@
+Matthew Henderson
+2301614
+
 # Breakout
 
 W Kavanagh & N Merchant. Summer 2024 (last maintained, Oct 26)
@@ -35,11 +38,24 @@ _TO DO_
 
 <Add information to this section about the time you've taken for this task along with a professional changelist.>
 
+35 Mins
+Trail affect
+
+1 hour
+Screen Shake
+
+1 hour 30 mins
+Added different health values and colours to the bricks
+
+2 hour
+Walls now change colour when they bounce
+
 ---
 
 ### Change log
 * 2025 - Naman made it harder
 * 2026 - William made it easier again
+* 25/102026 - Added trail affect to ball
 
 ---
 

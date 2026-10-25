@@ -4,7 +4,11 @@
 
 class GameManager;  // forward declaration
 
-
+struct Trail{
+    sf::Vector2f _position;
+    sf::Color _colour;
+    float _lifetime;
+};
 
 class Ball {
 public:
@@ -17,6 +21,9 @@ public:
 
 private:
     sf::CircleShape _sprite;
+    sf::RectangleShape _topRec;
+    sf::RectangleShape _leftRec;
+    sf::RectangleShape _rightRec;
     sf::Vector2f _direction;
     sf::RenderWindow* _window;
     float _velocity;
@@ -24,8 +31,12 @@ private:
     bool _isFireBall;
     float _timeWithPowerupEffect;
 
+    float _topColourTimer = 0.f;
+    float _sidetColourTimer = 0.f;
+
     GameManager* _gameManager;  // Reference to the GameManager
 
+    std::vector<Trail> _trailVector;
 
     static constexpr float RADIUS = 10.0f;      
     static constexpr float VELOCITY = 350.0f;   // for reference.

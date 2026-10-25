@@ -13,6 +13,13 @@ GameManager::GameManager(sf::RenderWindow* window)
     _masterText.setPosition(50, 400);
     _masterText.setCharacterSize(48);
     _masterText.setFillColor(sf::Color::Yellow);
+
+    _view = _window->getDefaultView();
+    _originalCentre = _view.getCenter();
+
+    _bottomRec.setSize(sf::Vector2f(_window->getSize().x, _window->getSize().y / 8.f));
+    _bottomRec.setFillColor(sf::Color::Black);
+    _bottomRec.setPosition(0.f, 780.f);
 }
 
 void GameManager::initialize()
@@ -85,6 +92,31 @@ void GameManager::update(float dt)
     _paddle->update(dt);
     _ball->update(dt);
     _powerupManager->update(dt);
+
+    if (_shakeDuration > 0.0f)
+    {
+        _shakeDuration -= dt;
+
+        int value = (std::rand() % 2);
+
+        if (value == 0)
+        {
+            value = -1;
+        }
+
+        float offsetX = value * _shakeStrength;
+        float offsetY = value * _shakeStrength;
+
+        _view.setCenter(_originalCentre + sf::Vector2f(offsetX, offsetY));
+        _window->setView(_view);
+        _bottomRec.setFillColor(sf::Color::Red);
+    }
+    else 
+    {
+        _view.setCenter(_originalCentre);
+        _window->setView(_view);
+        _bottomRec.setFillColor(sf::Color::Black);
+    }
 }
 
 void GameManager::loseLife()
@@ -93,6 +125,7 @@ void GameManager::loseLife()
     _ui->lifeLost(_lives);
 
     // TODO screen shake.
+    _shakeDuration = 0.3f;
 }
 
 void GameManager::render()
@@ -103,6 +136,7 @@ void GameManager::render()
     _powerupManager->render();
     _window->draw(_masterText);
     _ui->render();
+    _window->draw(_bottomRec);
 }
 
 void GameManager::levelComplete()

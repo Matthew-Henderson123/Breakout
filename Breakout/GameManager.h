@@ -47,6 +47,12 @@ private:
     MessagingSystem* _messagingSystem;
     UI* _ui;
 
+    sf::RectangleShape _bottomRec;
+    sf::View _view;
+    sf::Vector2f _originalCentre;
+    float _shakeDuration = 0.0f;
+    float _shakeStrength = 6.0f;
+
     static constexpr float PAUSE_TIME_BUFFER = 0.5f;
     static constexpr float POWERUP_FREQUENCY = 7.5f;    // time between minimum powerup spawn
 };
