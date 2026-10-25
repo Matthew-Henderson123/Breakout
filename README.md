@@ -50,6 +50,9 @@ Added different health values and colours to the bricks
 2 hour
 Walls now change colour when they bounce
 
+2 hour 20 mins
+Windows now has rainbow effect when a power up is collected
+
 ---
 
 ### Change log

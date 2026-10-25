@@ -130,6 +130,11 @@ void GameManager::loseLife()
 
 void GameManager::render()
 {
+    if (_powerupInEffect.second > 0)
+    {
+        _window->clear(sf::Color(((std::sin(_time) * 0.5 + 0.5) * 255), ((std::sin(_time + 2) * 0.5 + 0.5) * 225), ((std::sin(_time + 4) * 0.5 + 0.5) * 225)));
+    }
+
     _paddle->render();
     _ball->render();
     _brickManager->render();
