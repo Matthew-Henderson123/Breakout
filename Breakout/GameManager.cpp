@@ -29,10 +29,15 @@ void GameManager::initialize()
     _messagingSystem = new MessagingSystem(_window);
     _ball = new Ball(_window, 400.0f, this); 
     _powerupManager = new PowerupManager(_window, _paddle, _ball);
+
+    _lives = 3;
     _ui = new UI(_window, _lives, this);
 
     // Create bricks
     _brickManager->createBricks(5, 10, 80.0f, 30.0f, 5.0f);
+
+    _masterText.setString("");
+    _powerupInEffect.second = 0;
 }
 
 void GameManager::update(float dt)
@@ -45,11 +50,30 @@ void GameManager::update(float dt)
     if (_lives <= 0)
     {
         _masterText.setString("Game over.");
+        if (_restartCounter >= 0)
+        {
+            _restartCounter -= dt;
+        }
+        else
+        {
+            initialize();
+            _shakeDuration = 0.f;
+            _lives = 3;
+        }
         return;
     }
     if (_levelComplete)
     {
         _masterText.setString("Level completed.");
+        if (_restartCounter >= 0)
+        {
+            _restartCounter -= dt;
+        }
+        else
+        {
+            initialize();
+            _levelComplete = false;
+        }
         return;
     }
     // pause and pause handling
@@ -126,6 +150,11 @@ void GameManager::loseLife()
 
     // TODO screen shake.
     _shakeDuration = 0.3f;
+
+    if (_lives == 0)
+    {
+        _restartCounter = 3.0f;
+    }
 }
 
 void GameManager::render()
@@ -147,10 +176,12 @@ void GameManager::render()
 void GameManager::levelComplete()
 {
     _levelComplete = true;
+    _restartCounter = 3.f;
 }
 
 sf::RenderWindow* GameManager::getWindow() const { return _window; }
 UI* GameManager::getUI() const { return _ui; }
+
 Paddle* GameManager::getPaddle() const { return _paddle; }
 BrickManager* GameManager::getBrickManager() const { return _brickManager; }
 PowerupManager* GameManager::getPowerupManager() const { return _powerupManager; }

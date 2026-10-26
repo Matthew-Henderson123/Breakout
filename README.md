@@ -53,6 +53,9 @@ Walls now change colour when they bounce
 2 hour 20 mins
 Windows now has rainbow effect when a power up is collected
 
+3 hour
+Made game loop when completing and failing a level
+
 ---
 
 ### Change log

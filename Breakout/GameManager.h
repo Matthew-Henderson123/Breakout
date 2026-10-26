@@ -26,6 +26,8 @@ public:
     sf::RenderWindow* getWindow() const;
     UI* getUI() const;
 
+    bool getRestartGame();
+
 
 private:
     bool _pause;
@@ -52,6 +54,8 @@ private:
     sf::Vector2f _originalCentre;
     float _shakeDuration = 0.0f;
     float _shakeStrength = 6.0f;
+
+    float _restartCounter = 0.0f;
 
     static constexpr float PAUSE_TIME_BUFFER = 0.5f;
     static constexpr float POWERUP_FREQUENCY = 7.5f;    // time between minimum powerup spawn
