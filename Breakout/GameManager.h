@@ -26,7 +26,7 @@ public:
     sf::RenderWindow* getWindow() const;
     UI* getUI() const;
 
-    bool getRestartGame();
+    void addScore();
 
 
 private:
@@ -40,6 +40,8 @@ private:
 
     sf::Font _font;
     sf::Text _masterText;
+    sf::Text _scoreText;
+    int _score = 0;
 
     sf::RenderWindow* _window;
     Paddle* _paddle;

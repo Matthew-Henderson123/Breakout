@@ -56,6 +56,9 @@ Windows now has rainbow effect when a power up is collected
 3 hour
 Made game loop when completing and failing a level
 
+3 hour 30 mins
+Added score to game, made paddle turn green when hit
+
 ---
 
 ### Change log

@@ -43,6 +43,16 @@ void Paddle::update(float dt)
     {
         setWidth(1.0f, 0.0f); // Reset to default width after duration
     }
+
+    if (_hitTimer > 0)
+    {
+        _hitTimer -= dt;
+        _sprite.setFillColor(sf::Color::Green);
+    }
+    else
+    {
+        _sprite.setFillColor(sf::Color::Cyan);
+    }
 }
 
 void Paddle::render()
@@ -64,4 +74,9 @@ void Paddle::setWidth(float coeff, float duration)
     _timeInNewSize = duration;
     float newX = _sprite.getPosition().x + (_width - PADDLE_WIDTH) / 2;
     _sprite.setPosition(newX, _sprite.getPosition().y);
+}
+
+void Paddle::setTimer()
+{
+    _hitTimer = 0.1f;
 }

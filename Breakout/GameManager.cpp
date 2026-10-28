@@ -14,6 +14,11 @@ GameManager::GameManager(sf::RenderWindow* window)
     _masterText.setCharacterSize(48);
     _masterText.setFillColor(sf::Color::Yellow);
 
+    _scoreText.setFont(_font);
+    _scoreText.setPosition(200, 5);
+    _scoreText.setCharacterSize(48);
+    _scoreText.setFillColor(sf::Color::Yellow);
+
     _view = _window->getDefaultView();
     _originalCentre = _view.getCenter();
 
@@ -37,6 +42,8 @@ void GameManager::initialize()
     _brickManager->createBricks(5, 10, 80.0f, 30.0f, 5.0f);
 
     _masterText.setString("");
+    _scoreText.setString("0");
+    _score = 0;
     _powerupInEffect.second = 0;
 }
 
@@ -169,6 +176,7 @@ void GameManager::render()
     _brickManager->render();
     _powerupManager->render();
     _window->draw(_masterText);
+    _window->draw(_scoreText);
     _ui->render();
     _window->draw(_bottomRec);
 }
@@ -181,6 +189,12 @@ void GameManager::levelComplete()
 
 sf::RenderWindow* GameManager::getWindow() const { return _window; }
 UI* GameManager::getUI() const { return _ui; }
+
+void GameManager::addScore()
+{
+    _score++;
+    _scoreText.setString(std::to_string(_score));
+}
 
 Paddle* GameManager::getPaddle() const { return _paddle; }
 BrickManager* GameManager::getBrickManager() const { return _brickManager; }
