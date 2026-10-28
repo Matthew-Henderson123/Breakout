@@ -59,6 +59,9 @@ Made game loop when completing and failing a level
 3 hour 30 mins
 Added score to game, made paddle turn green when hit
 
+4 hours
+Made ball accelerate every time it bounces on a wall or paddle. Added progress bar to powerups.
+
 ---
 
 ### Change log

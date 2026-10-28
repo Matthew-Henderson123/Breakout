@@ -19,6 +19,14 @@ GameManager::GameManager(sf::RenderWindow* window)
     _scoreText.setCharacterSize(48);
     _scoreText.setFillColor(sf::Color::Yellow);
 
+    _solidBar.setSize(sf::Vector2f(200.f, 30.f));
+    _solidBar.setFillColor(sf::Color::Red);
+    _solidBar.setPosition(500.f, 20.f);
+
+    _progressBar.setSize(sf::Vector2f(200.f, 30.f));
+    _progressBar.setFillColor(sf::Color::Yellow);
+    _progressBar.setPosition(500.f, 20.f);
+
     _view = _window->getDefaultView();
     _originalCentre = _view.getCenter();
 
@@ -52,6 +60,16 @@ void GameManager::update(float dt)
     _powerupInEffect = _powerupManager->getPowerupInEffect();
     _ui->updatePowerupText(_powerupInEffect);
     _powerupInEffect.second -= dt;
+
+    if (_powerupInEffect.second > 0)
+    {
+        _powerTimePerc = _powerupInEffect.second / _maxPowerTime;
+        _progressBar.setSize(sf::Vector2f((200.f * _powerTimePerc), 30.f));
+    }
+    else
+    {
+        _progressBar.setSize(sf::Vector2f(200.f, 30.f));
+    }
     
 
     if (_lives <= 0)
@@ -169,6 +187,12 @@ void GameManager::render()
     if (_powerupInEffect.second > 0)
     {
         _window->clear(sf::Color(((std::sin(_time) * 0.5 + 0.5) * 255), ((std::sin(_time + 2) * 0.5 + 0.5) * 225), ((std::sin(_time + 4) * 0.5 + 0.5) * 225)));
+    }
+
+    if (_progressBar.getSize().x != 200)
+    {
+        _window->draw(_solidBar);
+        _window->draw(_progressBar);
     }
 
     _paddle->render();

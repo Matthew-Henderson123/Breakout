@@ -31,6 +31,8 @@ private:
     bool _isFireBall;
     float _timeWithPowerupEffect;
 
+    float _acceleration = 0.0f;
+
     float _topColourTimer = 0.f;
     float _sidetColourTimer = 0.f;
 

@@ -35,8 +35,8 @@ void Ball::update(float dt)
     }
     else
     {
-        if (_velocity != VELOCITY)
-            _velocity = VELOCITY;   // reset speed.
+        if (_velocity != VELOCITY + _acceleration)
+            _velocity = VELOCITY + _acceleration;   // reset speed.
         else
         {
             setFireBall(0);    // disable fireball
@@ -64,6 +64,7 @@ void Ball::update(float dt)
     {
         _direction.x *= -1;
         _sidetColourTimer = 0.1f;
+        _acceleration += 5.f;
     }
 
     // bounce on ceiling
@@ -71,6 +72,7 @@ void Ball::update(float dt)
     {
         _direction.y *= -1;
         _topColourTimer = 0.1f;
+        _acceleration += 5.f;
     }
 
     // lose life bounce
@@ -79,6 +81,7 @@ void Ball::update(float dt)
         _sprite.setPosition(0, 300);
         _direction = { 1, 1 };
         _gameManager->loseLife();
+        _acceleration = 0;
     }
 
     // collision with paddle
@@ -93,6 +96,7 @@ void Ball::update(float dt)
         _sprite.setPosition(_sprite.getPosition().x, _gameManager->getPaddle()->getBounds().top - 2 * RADIUS);
 
         _gameManager->getPaddle()->setTimer();
+        _acceleration += 5.f;
     }
 
     // collision with bricks
@@ -167,7 +171,7 @@ void Ball::render()
 
 void Ball::setVelocity(float coeff, float duration)
 {
-    _velocity = coeff * VELOCITY;
+    _velocity = coeff * (VELOCITY + _acceleration);
     _timeWithPowerupEffect = duration;
 }
 

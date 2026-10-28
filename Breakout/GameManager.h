@@ -38,6 +38,11 @@ private:
     bool _levelComplete;
     std::pair<POWERUPS, float> _powerupInEffect;
 
+    sf::RectangleShape _solidBar;
+    sf::RectangleShape _progressBar;
+    float _maxPowerTime = 5.0f;
+    float _powerTimePerc = 0.0f;
+
     sf::Font _font;
     sf::Text _masterText;
     sf::Text _scoreText;
